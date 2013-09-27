@@ -2,17 +2,17 @@
 
 require_once('../ProjectBaselineSettings/settings.php');
 
-echo $url;
+$service_url = $url . '/table/languages/0.json';
 
 // initialice curl
 $curl = curl_init($service_url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 // get curl responce
-$curl_responce = curl_exec($curl);
+$curl_response = curl_exec($curl);
 
 // error catch
-if($curl_responce === false) {
+if($curl_response === false) {
   $info = curl_getinfo($curl);
   curl_close($curl);
   die('error'. var_export($info));
