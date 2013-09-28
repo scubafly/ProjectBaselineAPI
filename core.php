@@ -1,7 +1,7 @@
 <?php
 
 //require_once('../ProjectBaselineSettings/settings.php');
-$standardVars = array("userID" => USER_ID, "userPass" => USER_PASS, "language" => "en");
+$vars = array("userID" => USER_ID, "userPass" => USER_PASS, "language" => "en");
 $url = 'xxxxx';
 
 $service_url = $url . '/table/languages/0.json';
