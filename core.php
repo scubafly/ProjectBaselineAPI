@@ -8,18 +8,36 @@ require_once('../ProjectBaselineSettings/settings.php');
  * @param  array $params parameters needed to create the get / post url
  * @return connect_api response.
  */
-function action_controller($action, $params = array(0)) {
+function action_controller($action, $params = array()) {
+  $vars = array( "userID" => USER_ID, "userPass" => USER_PASS, "language" => DEFAULT_LANGUAGE );
   switch ($action) {
-    case 'getlanguages':
+    case 'getlanguage':
       $url = '/table/languages/'.$params[0];
+      break;
+
+    case 'getlanguages':
+      $url = '/table/languages/0';
+      break;
+
+    case 'query':
+      $url = '/query';
+      $params['userID'] = USER_ID;
+      $params['userPass'] = USER_PASS;
+      $params['language'] = DEFAULT_LANGUAGE;
+      $params['unitSystemID'] = 1;
+      $vars = $params;
+      break;
+
+    case 'get_sites_by_country_id':
+      $url = '/sites/country/159';
       break;
 
     default:
       // there is no default.
       break;
   }
-  if($url) {
-    return connect_api( BASE_URL . $url . '.json' );
+  if($url AND $vars) {
+    return connect_api( BASE_URL . $url . '.json', $vars );
   }
   die('Error: could not create url or got wrong response from connect_api function. Make sure $action isset correctly.');
 
@@ -30,9 +48,8 @@ function action_controller($action, $params = array(0)) {
  * @param  string $service_url url to connect to
  * @return api response
  */
-function connect_api($service_url) {
+function connect_api($service_url, $vars ) {
 
-  $vars = array("userID" => USER_ID, "userPass" => USER_PASS, "language" => "en");
   // initialice curl
   $curl = curl_init($service_url.'?'.$vars);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
