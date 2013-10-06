@@ -5,12 +5,13 @@ require_once('../ProjectBaselineSettings/settings.php');
 /**
  * action_controller wil generate the url to connect to on given action
  * @param  string $action what the action is that needs to be done.
+ * @param  array $params parameters needed to create the get / post url
  * @return connect_api response.
  */
-function action_controller($action) {
+function action_controller($action, $params = array(0)) {
   switch ($action) {
     case 'getlanguages':
-      $url = '/table/languages/0';
+      $url = '/table/languages/'.$params[0];
       break;
 
     default:
