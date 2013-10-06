@@ -1,6 +1,11 @@
 <?php
 
 require_once('../ProjectBaselineSettings/settings.php');
+// this is set in settings:
+// define("BASE_URL", '');
+// define("USER_ID", '');
+// define("USER_PASS", '');
+// define("DEFAULT_LANGUAGE", 'en');
 
 /**
  * action_controller wil generate the url to connect to on given action
