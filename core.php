@@ -1,11 +1,13 @@
 <?php
 
-require_once('../ProjectBaselineSettings/settings.php');
+//require_once('../ProjectBaselineSettings/settings.php');
+$vars = array("userID" => USER_ID, "userPass" => USER_PASS, "language" => "en");
+$url = 'xxxxx';
 
 $service_url = $url . '/table/languages/0.json';
 
 // initialice curl
-$curl = curl_init($service_url);
+$curl = curl_init($service_url.'?'.$vars);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 // get curl responce
@@ -30,7 +32,7 @@ if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') 
 
 // if ok, echo ok.
 echo 'response ok!';
-var_export($decoded->response);
+var_export($decoded->languages);
 
 
 ?>
