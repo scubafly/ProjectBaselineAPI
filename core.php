@@ -2,6 +2,11 @@
 
 require_once('../ProjectBaselineSettings/settings.php');
 
+/**
+ * action_controller wil generate the url to connect to on given action
+ * @param  string $action what the action is that needs to be done.
+ * @return connect_api response.
+ */
 function action_controller($action) {
   switch ($action) {
     case 'getlanguages':
@@ -15,10 +20,15 @@ function action_controller($action) {
   if($url) {
     return connect_api( BASE_URL . $url . '.json' );
   }
-  die('Error: could not create url or got wrong responce from connect_api function. Make sure $action isset correctly.');
+  die('Error: could not create url or got wrong response from connect_api function. Make sure $action isset correctly.');
 
 }
 
+/**
+ * using curl to connect to the api
+ * @param  string $service_url url to connect to
+ * @return api response
+ */
 function connect_api($service_url) {
 
   $vars = array("userID" => USER_ID, "userPass" => USER_PASS, "language" => "en");
@@ -26,7 +36,7 @@ function connect_api($service_url) {
   $curl = curl_init($service_url.'?'.$vars);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-  // get curl responce
+  // get curl response
   $curl_response = curl_exec($curl);
 
   // error catch
